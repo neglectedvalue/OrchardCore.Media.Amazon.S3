@@ -66,15 +66,11 @@ namespace OrchardCore.FileStorage.Amazon.S3
                 FetchOwner = false
             });
 
-            if (awsDirectory.S3Objects.Any())
-            {
-                return new AwsDirectory(path, _clock.UtcNow);
-            }
-
-            return null;
+            return awsDirectory.S3Objects.Any() ? new AwsDirectory(path, _clock.UtcNow) : null;
         }
 
-        public async IAsyncEnumerable<IFileStoreEntry> GetDirectoryContentAsync(string path = null, bool includeSubDirectories = false)
+        public async IAsyncEnumerable<IFileStoreEntry> GetDirectoryContentAsync(string path = null, 
+            bool includeSubDirectories = false)
         {
             var listObjectsResponse = await _amazonS3Client.ListObjectsV2Async(new ListObjectsV2Request
             {
@@ -116,13 +112,13 @@ namespace OrchardCore.FileStorage.Amazon.S3
         {
             try
             {
-                await _amazonS3Client.PutObjectAsync(new PutObjectRequest
+                var response = await _amazonS3Client.PutObjectAsync(new PutObjectRequest
                 {
                     BucketName = _options.BucketName,
                     Key = NormalizePrefix(this.Combine(_basePrefix, path))
                 });
                 
-                return true;
+                return response.IsSuccessful();
             }
             catch (AmazonS3Exception)
             {
@@ -134,13 +130,13 @@ namespace OrchardCore.FileStorage.Amazon.S3
         {
             try
             {
-                await _amazonS3Client.DeleteObjectAsync(new DeleteObjectRequest
+                var response = await _amazonS3Client.DeleteObjectAsync(new DeleteObjectRequest
                 {
                     BucketName = _options.BucketName,
                     Key = this.Combine(_basePrefix, path)
                 });
                 
-                return true;
+                return response.IsSuccessful();
             }
             catch (AmazonS3Exception)
             {
@@ -150,7 +146,7 @@ namespace OrchardCore.FileStorage.Amazon.S3
 
         public async Task<bool> TryDeleteDirectoryAsync(string path)
         {
-            if (string.IsNullOrEmpty(path))
+            if (string.IsNullOrWhiteSpace(path))
             {
                 throw new FileStoreException("Cannot delete the root directory.");
             }
@@ -168,9 +164,9 @@ namespace OrchardCore.FileStorage.Amazon.S3
                     .Select( key => new KeyVersion { Key = key.Key }).ToList()
             };
 
-            await _amazonS3Client.DeleteObjectsAsync(deleteObjectsRequest);
+            var response = await _amazonS3Client.DeleteObjectsAsync(deleteObjectsRequest);
 
-            return true;
+            return response.IsSuccessful();
         }
 
         public async Task MoveFileAsync(string oldPath, string newPath)
@@ -220,7 +216,7 @@ namespace OrchardCore.FileStorage.Amazon.S3
                     DestinationKey = this.Combine(_basePrefix, dstPath)
                 });
 
-                if (copyObjectResponse.HttpStatusCode != HttpStatusCode.OK)
+                if (!copyObjectResponse.IsSuccessful())
                 {
                     throw new FileStoreException($"Error while copying file '{srcPath}'");
                 }
@@ -275,7 +271,7 @@ namespace OrchardCore.FileStorage.Amazon.S3
                     InputStream = inputStream
                 });
 
-                if (response.HttpStatusCode != HttpStatusCode.OK)
+                if (!response.IsSuccessful())
                 {
                     throw new FileStoreException($"Cannot create file '{path}'");
                 }
