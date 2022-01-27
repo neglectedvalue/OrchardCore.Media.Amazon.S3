@@ -1,21 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <PackageVersion>1.0.4</PackageVersion>
+        <PackageVersion>1.1.0</PackageVersion>
         <Title>OrchardCore.Media.Amazon.S3</Title>
         <Authors>ngv</Authors>
         <PackageProjectUrl>https://github.com/neglectedvalue/OrchardCore.Media.Amazon.S3</PackageProjectUrl>
         <RepositoryUrl>https://github.com/neglectedvalue/OrchardCore.Media.Amazon.S3</RepositoryUrl>
         <PackageId>ngv.OrchardCore.FileStorage.Amazon.S3</PackageId>
-        <LangVersion>8</LangVersion>
-        <TargetFrameworks>net5.0;netcoreapp3.1</TargetFrameworks>
+        <LangVersion>9</LangVersion>
+        <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="AWSSDK.S3" Version="3.7.7.4" />
-      <PackageReference Include="AWSSDK.SecurityToken" Version="3.7.1.99" />
-      <PackageReference Include="OrchardCore.Abstractions" Version="1.1.0" />
-      <PackageReference Include="OrchardCore.FileStorage.Abstractions" Version="1.1.0" />
+      <PackageReference Include="AWSSDK.S3" Version="3.7.7.16" />
+      <PackageReference Include="AWSSDK.SecurityToken" Version="3.7.1.109" />
+      <PackageReference Include="OrchardCore.Abstractions" Version="1.2.2" />
+      <PackageReference Include="OrchardCore.FileStorage.Abstractions" Version="1.2.2" />
     </ItemGroup>
 
 </Project>

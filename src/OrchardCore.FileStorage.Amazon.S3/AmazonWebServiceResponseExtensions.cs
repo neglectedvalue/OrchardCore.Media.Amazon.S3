@@ -6,9 +6,7 @@ namespace OrchardCore.FileStorage.Amazon.S3
     
     public static class AmazonWebServiceResponseExtensions
     {
-        public static bool IsSuccessful(this AmazonWebServiceResponse response)
-        {
-            return response.HttpStatusCode == HttpStatusCode.OK;
-        }
+        public static bool IsSuccessful(this AmazonWebServiceResponse response) =>
+            response.HttpStatusCode == HttpStatusCode.OK;
     }
 }
