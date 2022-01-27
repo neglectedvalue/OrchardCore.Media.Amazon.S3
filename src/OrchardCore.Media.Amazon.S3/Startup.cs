@@ -139,7 +139,8 @@ namespace OrchardCore.Media.Amazon.S3
                         $"/{fileStore.Combine(shellSettings.RequestUrlPrefix, mediaOptions.AssetsRequestPath)}";
 
                     var originalPathBase = serviceProvider.GetRequiredService<IHttpContextAccessor>().HttpContext
-                        ?.Features.Get<ShellContextFeature>().OriginalPathBase;
+                        ?.Features.Get<ShellContextFeature>()
+                        ?.OriginalPathBase;
 
                     if (originalPathBase.HasValue)
                     {

@@ -17,7 +17,7 @@ namespace OrchardCore.FileStorage.Amazon.S3
     {
         private readonly IClock _clock;
         private readonly AwsStorageOptions _options;
-        private readonly string _basePrefix = null;
+        private readonly string _basePrefix;
         private readonly IAmazonS3 _amazonS3Client;
 
         public AwsFileStore(IClock clock, AwsStorageOptions options, IAmazonS3 amazonS3Client)
@@ -148,7 +148,7 @@ namespace OrchardCore.FileStorage.Amazon.S3
         {
             if (string.IsNullOrWhiteSpace(path))
             {
-                throw new FileStoreException("Cannot delete the root directory.");
+                throw new FileStoreException("Cannot delete root directory.");
             }
 
             var listObjectsResponse = await _amazonS3Client.ListObjectsV2Async(new ListObjectsV2Request

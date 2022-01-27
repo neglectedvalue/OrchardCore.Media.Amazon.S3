@@ -1,27 +1,33 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <PackageVersion>1.0.4</PackageVersion>
+        <PackageVersion>1.1.0</PackageVersion>
         <Title>OrchardCore.Media.Amazon.S3</Title>
         <Authors>ngv</Authors>
         <Description>Amazon S3 provider for the OrchardCore</Description>
         <PackageProjectUrl>https://github.com/neglectedvalue/OrchardCore.Media.Amazon.S3</PackageProjectUrl>
         <RepositoryUrl>https://github.com/neglectedvalue/OrchardCore.Media.Amazon.S3</RepositoryUrl>
         <PackageId>ngv.OrchardCore.Media.Amazon.S3</PackageId>
-        <LangVersion>8</LangVersion>
-        <TargetFrameworks>net5.0;netcoreapp3.1</TargetFrameworks>
+        <LangVersion>9</LangVersion>
+        <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="OrchardCore.Abstractions" Version="1.1.0" />
-      <PackageReference Include="OrchardCore.Infrastructure.Abstractions" Version="1.1.0" />
-      <PackageReference Include="OrchardCore.Media.Abstractions" Version="1.1.0" />
-      <PackageReference Include="OrchardCore.Media.Core" Version="1.1.0" />
-      <PackageReference Include="OrchardCore.Module.Targets" Version="1.1.0" />
+      <PackageReference Include="OrchardCore.Abstractions" Version="1.2.2" />
+      <PackageReference Include="OrchardCore.Infrastructure.Abstractions" Version="1.2.2" />
+      <PackageReference Include="OrchardCore.Media.Abstractions" Version="1.2.2" />
+      <PackageReference Include="OrchardCore.Media.Core" Version="1.2.2" />
+      <PackageReference Include="OrchardCore.Module.Targets" Version="1.2.2" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\OrchardCore.FileStorage.Amazon.S3\OrchardCore.FileStorage.Amazon.S3.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="README.md">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
