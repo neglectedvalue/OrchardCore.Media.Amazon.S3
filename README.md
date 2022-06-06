@@ -1,6 +1,9 @@
 # OrchardCore.Media.Amazon.S3
 ### Amazon S3 bucket provider for OrchardCore
 
+## Depricated
+## This code with couple new features was merged into the OrchardCore https://github.com/OrchardCMS/OrchardCore/pull/11738
+
 [![CI](https://github.com/neglectedvalue/OrchardCore.Media.Amazon.S3/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/neglectedvalue/OrchardCore.Media.Amazon.S3/actions/workflows/CI.yml)
 
 To use this feature you should enable 'OrchardCore.Media.Amazon.S3' in the Orchard admin panel.
