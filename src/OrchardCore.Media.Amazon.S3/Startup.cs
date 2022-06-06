@@ -38,6 +38,8 @@ namespace OrchardCore.Media.Amazon.S3
             => (_configuration, _webHostEnvironment, _logger) 
                 = (configuration, webHostEnvironment, logger);
 
+        public override int Order => 10;
+        
         public override void ConfigureServices(IServiceCollection services)
         {
             var storeOptions = new AwsStorageOptions().BindConfiguration(_configuration);
